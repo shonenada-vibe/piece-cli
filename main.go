@@ -17,7 +17,7 @@ import (
 var version = "dev"
 
 func usage() {
-	fmt.Fprintf(os.Stderr, `piece - https://piece.md CLI
+	fmt.Fprintf(os.Stderr, `piece %s - https://piece.md CLI
 
 Usage:
   piece config <server_url>    Set the server URL
@@ -28,7 +28,7 @@ Usage:
   piece version                Show version information
   piece help                   Show this help message
 
-`)
+`, effectiveVersion())
 }
 
 func effectiveVersion() string {
