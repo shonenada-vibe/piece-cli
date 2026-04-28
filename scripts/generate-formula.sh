@@ -30,7 +30,7 @@ SHA_LINUX_AMD64=$(fetch_sha256 "linux" "amd64")
 
 cat <<EOF
 class Piece < Formula
-  desc "Command line recorder and uploader for MindNote terminal recordings"
+  desc "Command-line recorder and uploader for MindNote terminal recordings"
   homepage "https://github.com/shonenada-vibe/piece-cli"
   version "${VERSION}"
   license "MIT"
