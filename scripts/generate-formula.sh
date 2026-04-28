@@ -30,7 +30,7 @@ SHA_LINUX_AMD64=$(fetch_sha256 "linux" "amd64")
 
 cat <<EOF
 class Piece < Formula
-  desc "Command-line recorder and uploader for MindNote terminal recordings"
+  desc "Command-line recorder and uploader for piece.md terminal recordings"
   homepage "https://github.com/shonenada-vibe/piece-cli"
   version "${VERSION}"
   license "MIT"
@@ -60,7 +60,7 @@ class Piece < Formula
   end
 
   test do
-    assert_match "MindNote CLI", shell_output("#{bin}/piece help")
+    assert_match version.to_s, shell_output("#{bin}/piece version")
   end
 end
 EOF

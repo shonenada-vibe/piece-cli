@@ -7,14 +7,17 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"runtime/debug"
 	"strings"
 	"time"
 
 	"golang.org/x/term"
 )
 
+var version = "dev"
+
 func usage() {
-	fmt.Fprintf(os.Stderr, `piece — MindNote CLI
+	fmt.Fprintf(os.Stderr, `piece - https://piece.md CLI
 
 Usage:
   piece config <server_url>    Set the server URL
@@ -22,9 +25,22 @@ Usage:
   piece login                  Authenticate and store API token
   piece record [output.cast]   Record a terminal session (default: recording.cast)
   piece upload <file.cast>     Upload a recording and create a note
+  piece version                Show version information
   piece help                   Show this help message
 
 `)
+}
+
+func effectiveVersion() string {
+	if version != "" && version != "dev" {
+		return version
+	}
+
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		return info.Main.Version
+	}
+
+	return version
 }
 
 func main() {
@@ -42,6 +58,8 @@ func main() {
 		cmdRecord(os.Args[2:])
 	case "upload":
 		cmdUpload(os.Args[2:])
+	case "version", "--version", "-v":
+		fmt.Printf("piece %s\n", effectiveVersion())
 	case "help", "--help", "-h":
 		usage()
 	default:
